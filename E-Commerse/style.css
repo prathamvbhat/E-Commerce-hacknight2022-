@@ -1,0 +1,26 @@
+.checked {
+    color: orange;
+  }
+
+  .llogo{
+    height: 40px;
+    width: 40px;
+    padding: 0.5%;
+    margin-left: 0%;
+  }
+  .card{
+    background-color: antiquewhite;
+    padding-left: 7%;
+    width: 15%;
+
+  }
+  .star{
+    padding-bottom: 40px;
+    top: 0;
+  }
+
+  #root {
+    display: flex;
+    justify-content: space-around;
+    
+  }

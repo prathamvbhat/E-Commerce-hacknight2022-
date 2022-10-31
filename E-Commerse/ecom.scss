@@ -1,0 +1,264 @@
+$font-size: 20px;
+$frame-color: #000000;
+$size: 2.5em;
+$open-width: 18em;
+$open-padding: 0.3em 2.1em 0.3em 0.4em;
+$frame-thickness: 0.3em;
+$handle-height: 1.4em;
+$open-trans-time: 800ms;
+$close-trans-time: 150ms;
+
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
+
+html, body {
+	font-family: Raleway, sans-serif;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: nowrap;
+	overflow: hidden;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//                                 SEARCH BOX                                 //
+////////////////////////////////////////////////////////////////////////////////
+
+.search-box {
+	font-size: $font-size;
+	border: solid $frame-thickness $frame-color;
+	display: inline-block;
+	position: relative;
+	border-radius: $size;
+	input[type="text"] {
+		font-family: inherit;
+		font-weight: bold;
+		width: $size;
+		height: $size;
+		padding: $open-padding;
+		border: none;
+		box-sizing: border-box;
+		border-radius: $size;
+		transition:
+			width $open-trans-time cubic-bezier(0.68, -0.55, 0.27, 1.55) $close-trans-time;
+		&:focus {
+			outline: none;
+		}
+		&:focus, &:not(:placeholder-shown) {
+			width: $open-width;
+			transition: width $open-trans-time cubic-bezier(0.68, -0.55, 0.27, 1.55);
+			+ button[type="reset"] {
+				transform: rotate(-45deg) translateY(0);
+				transition:
+					transform $close-trans-time ease-out $open-trans-time;
+			}
+			+ button[type="reset"]:after {
+				opacity: 1;
+				transition:
+					top $close-trans-time ease-out ($open-trans-time + $close-trans-time),
+					right $close-trans-time ease-out ($open-trans-time + $close-trans-time),
+					opacity $close-trans-time ease ($open-trans-time + $close-trans-time);
+			}
+		}
+	}
+	button[type="reset"] {
+		background-color: transparent;
+		width: $handle-height;
+		height: $handle-height;
+		border: 0;
+		padding: 0;
+		outline: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		top: ($size / 2) - ($handle-height / 2);
+		right: ($size / 2) - ($handle-height / 2);
+		transform: rotate(-45deg) translateY($size - $frame-thickness);
+		transition:
+			transform $close-trans-time ease-out $close-trans-time;
+		&:before, &:after {
+			content: "";
+			background-color: $frame-color;
+			width: $frame-thickness;
+			height: $handle-height;
+			position: absolute;
+		}
+		&:after {
+			transform: rotate(90deg);
+			opacity: 0;
+			transition:
+				transform $close-trans-time ease-out,
+				opacity $close-trans-time ease-out;
+		}
+	}
+}
+
+$colorPrimary: #4a92a8;
+$colorSecondary: #9cbfc9;
+$colorTertiary: #8eb6c2;
+$colorLight: #f7f7f7;
+$colorExtra: #acc9d2;
+$mainFont: 'Open Sans';
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: $mainFont, -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* --- */
+
+.qtySelect {
+  $color: $colorLight;
+  $colorBg: $colorPrimary;
+  $colorBgInput: $colorExtra;
+  $colorBgHover: $colorSecondary;
+  $colorBgHoverHighlight: $colorTertiary;
+  $dimen: 60px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: $dimen;
+  padding: 5px;
+  position: relative;
+  color: $color;
+  
+  * {
+    height: $dimen;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0 !important;
+    background-color: $colorBg;
+    transition: all .3s ease-in;
+  }
+  
+  .reduce, .increment {
+    width: $dimen;
+    cursor: pointer;
+    
+    svg {
+      height: 50%;
+      width: 0;
+      stroke-width: 0;
+      fill: $color;
+    }
+    
+    &:hover {
+      background-color: $colorBgHoverHighlight !important;
+      
+      svg {
+        background-color: $colorBgHoverHighlight !important;
+      }
+    }
+  }
+  
+  .reduce {
+    border-right: $colorBgInput 1px solid;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }
+  
+  .increment {
+    border-left: $colorBgInput 1px solid;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+  
+  .value {
+    width: 0;
+    padding: 0;
+    border: 0 transparent;
+    border-radius: 0;
+    text-align: center;
+    color: $color;
+    background-color: $colorBgHover;
+    
+    /*
+    &:focus {
+      background-color: $colorBgHoverHighlight !important;
+    }
+    */
+  }
+  
+  .add {
+    display: inherit;
+    align-items: center;
+    min-width: fit-content;
+    padding: 0 .33*$dimen;
+    border: 0 transparent;
+    border-radius: 0;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: $colorBgHoverHighlight;
+    }
+  }
+  
+  .caption {
+    display: inherit;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 10px;
+    border-radius: $dimen;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    overflow: hidden;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: $colorBgHoverHighlight !important;
+    }
+  }
+  
+  &.expanded {
+    * {
+      background-color: $colorBgHover;
+    }
+    
+    .caption {
+      width: 0;
+      height: 0;
+      padding: 0;
+      top: 50%;
+      left: 50%;
+      right: 50%;
+      bottom: 50%;
+      opacity: 0;
+    }
+    
+    .reduce, .increment {
+      svg {
+        width: .33*$dimen;
+      }
+    }
+    
+    .value {
+      width: $dimen;
+      padding: 0 10px;
+      background-color: $colorBgInput;
+    }
+  }
+}
